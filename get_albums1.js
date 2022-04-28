@@ -102,19 +102,24 @@ var spotifyApi = new SpotifyWebApi({
 
   async function getUserAlbums() {
 	const page = await spotifyApi.getMySavedAlbums({limit: 50, offset: 0})
-  
+	let temp = page.body.items;
+	const pageJSON = { temp }
+	let temp2 = JSON.stringify(pageJSON);
+	fs.writeFileSync('data.json', temp2);
+	let data = '';
 	// console.log("---------------+++++++++++++++++++++++++")
 	// let playlists = []
 	// data = '';
 	// data = data.concat(page.body.items);
-	// for (let album of data.body.items) {
-	//   console.log(album.name + " " + album.id)
-	  
+	for (let album of temp) {
+	  console.log(album.album.name + " " + album.album.id);
+	  data = data.concat("name: " + album.album.name + "; image: " + album.album.images[0].url + "; year: " + album.album.release_date + "; artist: " + album.album.artists[0].name + "; tracks: " + album.album.tracks.items[0].name);
+	}
 	//   let tracks = await getPlaylistTracks(playlist.id, playlist.name);
 	  // console.log(tracks);
   
-	const pageJSON = { page }
-	let data = JSON.stringify(pageJSON);
+	// const pageJSON = { temp }
+	// let data = JSON.stringify(pageJSON);
 	fs.writeFileSync('test.json', data);
 	// }
   }
