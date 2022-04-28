@@ -2,8 +2,6 @@ var SpotifyWebApi = require('spotify-web-api-node');
 const fs = require('fs')
 const express = require('express')
 
-// This file is copied from: https://github.com/thelinmichael/spotify-web-api-node/blob/master/examples/tutorial/00-get-access-token.js
-
 const scopes = [
     'ugc-image-upload',
     'user-read-playback-state',
@@ -26,7 +24,6 @@ const scopes = [
     'user-follow-modify'
   ];
   
-// credentials are optional
 var spotifyApi = new SpotifyWebApi({
     clientId: '2c77e71c0a904ff8b4f97d0b304a506e',
     clientSecret: '42daf703635e40b2ade34a360250f2b8',
@@ -60,12 +57,7 @@ var spotifyApi = new SpotifyWebApi({
         spotifyApi.setAccessToken(access_token);
         spotifyApi.setRefreshToken(refresh_token);
   
-        console.log('access_token:', access_token);
-        console.log('refresh_token:', refresh_token);
-  
-        // console.log(
-        //   `Sucessfully retreived access token. Expires in ${expires_in} s.`
-        // );
+        console.log('Done! You can close server with Ctrl-C.'); 
         res.send('Success! You can now close the window.');
 		getMyData();
   
@@ -93,7 +85,6 @@ var spotifyApi = new SpotifyWebApi({
   function getMyData() {
 	(async () => {
 	  const me = await spotifyApi.getMe();
-	  // console.log(me.body);
 	  getUserAlbums(me.body.id);
 	})().catch(e => {
 	  console.error(e);
@@ -103,16 +94,8 @@ var spotifyApi = new SpotifyWebApi({
   async function getUserAlbums() {
 	const page = await spotifyApi.getMySavedAlbums({limit: 50, offset: 0})
 	let temp = page.body.items;
-	const pageJSON = { temp }
-	let temp2 = JSON.stringify(pageJSON);
-	fs.writeFileSync('data.json', temp2);
 	let data = '';
-	// console.log("---------------+++++++++++++++++++++++++")
-	// let playlists = []
-	// data = '';
-	// data = data.concat(page.body.items);
 	for (let album of temp) {
-	  console.log(album.album.name + " " + album.album.id);
 	  data = data.concat("name: " + album.album.name + "; image: " + album.album.images[0].url + "; year: " + album.album.release_date + "; artist: " + album.album.artists[0].name + "; tracks: ");
 	  for (let [index, track] of album.album.tracks.items.entries()) {
 		if (index != 0) {
@@ -122,13 +105,7 @@ var spotifyApi = new SpotifyWebApi({
 	  }
 	  data = data.concat("\n");
 	}
-	//   let tracks = await getPlaylistTracks(playlist.id, playlist.name);
-	  // console.log(tracks);
-  
-	// const pageJSON = { temp }
-	// let data = JSON.stringify(pageJSON);
 	fs.writeFileSync('test.json', data);
-	// }
   }
 
 
