@@ -113,7 +113,13 @@ var spotifyApi = new SpotifyWebApi({
 	// data = data.concat(page.body.items);
 	for (let album of temp) {
 	  console.log(album.album.name + " " + album.album.id);
-	  data = data.concat("name: " + album.album.name + "; image: " + album.album.images[0].url + "; year: " + album.album.release_date + "; artist: " + album.album.artists[0].name + "; tracks: " + album.album.tracks.items[0].name);
+	  data = data.concat("name: " + album.album.name + "; image: " + album.album.images[0].url + "; year: " + album.album.release_date + "; artist: " + album.album.artists[0].name + "; tracks: ");
+	  for (let [index, track] of album.album.tracks.items.entries()) {
+		if (index != 0) {
+			data = data.concat(", ");
+		}
+		data = data.concat(track.name);
+	  }
 	}
 	//   let tracks = await getPlaylistTracks(playlist.id, playlist.name);
 	  // console.log(tracks);
