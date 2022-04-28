@@ -143,5 +143,16 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
+const getUserAlbums = async () => {
+  spotifyApi.setAccessToken(token)
+  console.log("api = ", spotifyApi);
+  spotifyApi.getMySavedAlbums().then(function(data){
+    console.log("data body albums = ", data.body.items);
+    setUserAlbums(data.body.items);
+  }, function(err){
+    console.log("Error ", err);
+  });
+}
+
 console.log('Listening on 8888');
 app.listen(8888);
