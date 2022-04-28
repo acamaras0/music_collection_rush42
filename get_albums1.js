@@ -25,9 +25,9 @@ const scopes = [
   ];
   
 var spotifyApi = new SpotifyWebApi({
-    clientId: '2c77e71c0a904ff8b4f97d0b304a506e',
-    clientSecret: '42daf703635e40b2ade34a360250f2b8',
-    redirectUri: 'http://localhost:8888/callback'
+    clientId: '0556a0ca11734b969f9185803abe22b9',
+    clientSecret: '0b75487d23a941eab5bbf95e647b3417',
+    redirectUri: 'http://localhost:8888/callback/'
   });
   
   const app = express();
@@ -95,16 +95,17 @@ var spotifyApi = new SpotifyWebApi({
 	const page = await spotifyApi.getMySavedAlbums({limit: 50, offset: 0})
 	let temp = page.body.items;
 	let data = '';
-	for (let album of temp) {
-	  data = data.concat("name: " + album.album.name + "; image: " + album.album.images[0].url + "; year: " + album.album.release_date + "; artist: " + album.album.artists[0].name + "; tracks: ");
-	  for (let [index, track] of album.album.tracks.items.entries()) {
-		if (index != 0) {
-			data = data.concat(", ");
-		}
-		data = data.concat(track.name);
-	  }
-	  data = data.concat("\n");
-	}
+	data = JSON.stringify(page.body.items);
+	// for (let album of temp) {
+	//   data = data.concat("name: " + album.album.name + "; image: " + album.album.images[0].url + "; year: " + album.album.release_date + "; artist: " + album.album.artists[0].name + "; tracks: ");
+	//   for (let [index, track] of album.album.tracks.items.entries()) {
+	// 	if (index != 0) {
+	// 		data = data.concat(", ");
+	// 	}
+	// 	data = data.concat(track.name);
+	//   }
+	//   data = data.concat("\n");
+	//}
 	fs.writeFileSync('test.json', data);
   }
 
