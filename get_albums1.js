@@ -120,6 +120,7 @@ var spotifyApi = new SpotifyWebApi({
 		}
 		data = data.concat(track.name);
 	  }
+	  data = data.concat("\n");
 	}
 	//   let tracks = await getPlaylistTracks(playlist.id, playlist.name);
 	  // console.log(tracks);
