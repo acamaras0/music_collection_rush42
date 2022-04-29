@@ -1,11 +1,15 @@
 # music_collection_rush42
 
-install Node.js
+INSTRUCTIONS
 
-npm install (in order to get the javascript spotify)
+install __Node.js__ if you don't have it yet installed.
 
-run: node get_albums1.js
+run: __npm install__ (in order to get the javascript spotify)
 
-open frontend.html in the browser.
+run: __node get_albums1.js__
+
+open http://localhost:8888/login in the browser.
+
+open __frontend.html__ in the browser.
 
 ta-da!!
