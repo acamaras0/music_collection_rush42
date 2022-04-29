@@ -2,7 +2,7 @@
 
 install Node.js
 
-nmp install (in order to get the javascript spotify)
+npm install (in order to get the javascript spotify)
 
 run: node get_albums1.js
 
