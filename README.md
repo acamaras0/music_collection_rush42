@@ -6,7 +6,7 @@ install __Node.js__ if you don't have it yet installed.
 
 run: __npm install__ (in order to get the javascript spotify)
 
-run: __node get_albums1.js__
+run: __node get_albums.js__
 
 open http://localhost:8888/login in the browser.
 
