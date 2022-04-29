@@ -59,22 +59,18 @@
               console.log(key);
               let linkImg = val.album.images[0].url;
               let albumName = val.album.name;
-              let yearAlbum = val.album.release_date;
-              let artistName = val.album.artists[0].name;
+              let yearAlbum = $('<div id="year"/>').text(val.album.release_date);
+              let artistName = $('<h3 id="artist" />').text(val.album.artists[0].name);
               let trackList = val.album.tracks.items;
+              let album = $('<div><h2 id="name">' + albumName +"</h2></div>")
+              album.append(artistName);
+              album.append(yearAlbum);
+              album.append($('<img />', {src: linkImg}));
               for (let track of trackList){
                 let trackName = $("<div id='tracks'>" + track.name +"</div>")
-                $(".container").append(trackName);
+                album.append(trackName);
               }
-              $("#name").append(albumName);
-              $("#artist").append(artistName);
-              $("#image").attr("src", linkImg);
-              $("#year").append(yearAlbum);
-
-              // for (let album of loop) {
-	            //   data = data.concat(album.albumName + album.album.images[0].url + album.album.release_date
-              //       + album.album.artists[0].name);
-	            // }
+              $('body').append(album);
             });
           });
       }

@@ -59,7 +59,7 @@ var spotifyApi = new SpotifyWebApi({
   
         console.log('Done! You can close server with Ctrl-C.'); 
         res.send('Success! You can now close the window.');
-		getMyData();
+		    getMyData();
   
         setInterval(async () => {
           const data = await spotifyApi.refreshAccessToken();
@@ -93,19 +93,8 @@ var spotifyApi = new SpotifyWebApi({
 
   async function getUserAlbums() {
 	const page = await spotifyApi.getMySavedAlbums({limit: 50, offset: 0})
-	let temp = page.body.items;
 	let data = '';
 	data = JSON.stringify(page.body.items);
-	// for (let album of temp) {
-	//   data = data.concat("name: " + album.album.name + "; image: " + album.album.images[0].url + "; year: " + album.album.release_date + "; artist: " + album.album.artists[0].name + "; tracks: ");
-	//   for (let [index, track] of album.album.tracks.items.entries()) {
-	// 	if (index != 0) {
-	// 		data = data.concat(", ");
-	// 	}
-	// 	data = data.concat(track.name);
-	//   }
-	//   data = data.concat("\n");
-	//}
 	fs.writeFileSync('test.json', data);
   }
 
